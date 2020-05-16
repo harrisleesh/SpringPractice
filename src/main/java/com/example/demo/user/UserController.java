@@ -1,7 +1,5 @@
-package com.example.demo.controller;
+package com.example.demo.user;
 
-import com.example.demo.domain.User;
-import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
