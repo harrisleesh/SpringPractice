@@ -1,38 +1,38 @@
 package com.example.demo.post.api;
 
 import com.example.demo.post.service.PostService;
-import com.example.demo.user.domain.User;
+import com.example.demo.post.domain.Post;
 import org.springframework.web.bind.annotation.*;
 
 public class PostController {
-    private PostService userService;
+    private PostService postService;
 
-    UserController(PostService userService){
-        this.userService = userService;
+    PostController(PostService postService){
+        this.postService = postService;
     }
 
     //Read
-    @GetMapping("/users")
-    private User getUser(@RequestParam(required = true) int id){
-        return userService.getUser(id);
+    @GetMapping("/posts")
+    private Post getPost(@RequestParam(required = true) int id){
+        return postService.getPost(id);
     }
 
     //Create
-    @PostMapping("/users")
-    private User postUser(){
-        return userService.createUser();
+    @PostMapping("/posts")
+    private Post postPost(){
+        return postService.createPost();
     }
 
     //Update
 
-    @PutMapping("/users")
-    private User putUser(@RequestParam(required = true) int id, @RequestParam(required = true) String name){
-        return userService.updateUser(id, name);
+    @PutMapping("/posts")
+    private Post putPost(@RequestParam(required = true) int id, @RequestParam(required = true) String name){
+        return postService.updatePost(id, name);
     }
 
     //Delete
-    @DeleteMapping("/users")
-    private String deleteUser(@RequestParam(required = true) int id){
-        return userService.deleteUser(id);
+    @DeleteMapping("/posts")
+    private String deletePost(@RequestParam(required = true) int id){
+        return postService.deletePost(id);
     }
 }
