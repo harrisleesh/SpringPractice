@@ -1,9 +1,11 @@
 package com.example.demo.user;
 
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class User {
 
     private long id;
@@ -19,6 +21,10 @@ public class User {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.name = name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }

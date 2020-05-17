@@ -13,9 +13,9 @@ public class UserService {
     private List<User> users = new ArrayList<>();
     private Long nextId = 0L;
 
-    public UserResponse create(CreateUserRequest createUserRequest){
+    public UserResponse createUser(CreateUserRequest createUserRequest){
         User user = User.builder()
-                .id(nextId)
+                .id(nextId++)
                 .email(createUserRequest.getEmail())
                 .password(createUserRequest.getPassword())
                 .name(createUserRequest.getName())
@@ -26,18 +26,31 @@ public class UserService {
         return getUserResponse(user);
     }
 
-    public User getUser(int id) {
-        return users.stream()
-                .filter(user-> user.getId() == id)
-                .findFirst().get();
+    private UserResponse getUserResponse(User user) {
+        return UserResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .name(user.getName())
+                .build();
     }
 
-    public User updateUser(int id, String name) {
+    public UserResponse getUser(int id) {
+        return getUserResponse(
+                users.stream()
+                .filter(user-> user.getId() == id)
+                .findFirst().get()
+        );
+    }
+
+    public UserResponse updateUser(int id, String name) {
         User renameUser = users.stream()
                 .filter(user-> user.getId() == id)
                 .findFirst().get();
+//        users.remove(renameUser);
         renameUser.setName(name);
-        return renameUser;
+        //      users.add(renameUser);
+        return getUserResponse(renameUser);
     }
 
     public String deleteUser(int id) {

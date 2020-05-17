@@ -1,5 +1,6 @@
 package com.example.demo.user;
 
+import com.example.demo.user.dto.UserResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,20 +13,21 @@ public class UserController {
 
     //Read
     @GetMapping("/users")
-    private User getUser(@RequestParam(required = true) int id){
+    private UserResponse getUser(@RequestParam(required = true) int id){
         return userService.getUser(id);
     }
 
     //Create
     @PostMapping("/users")
-    private User postUser(){
-        return userService.createUser();
+    private UserResponse postUser(){
+//        return userService.createUser();
+        return null;
     }
 
     //Update
 
     @PutMapping("/users")
-    private User putUser(@RequestParam(required = true) int id, @RequestParam(required = true) String name){
+    private UserResponse putUser(@RequestParam(required = true) int id, @RequestParam(required = true) String name){
         return userService.updateUser(id, name);
     }
 
