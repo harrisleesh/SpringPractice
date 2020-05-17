@@ -1,6 +1,7 @@
-package com.example.demo.user;
+package com.example.demo.user.api;
 
-import com.example.demo.user.dto.UserResponse;
+import com.example.demo.user.service.UserService;
+import com.example.demo.user.api.dto.UserResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

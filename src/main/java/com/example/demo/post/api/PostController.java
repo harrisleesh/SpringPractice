@@ -1,7 +1,7 @@
-package com.example.demo.post;
+package com.example.demo.post.api;
 
-import com.example.demo.user.User;
-import com.example.demo.user.PostService;
+import com.example.demo.post.service.PostService;
+import com.example.demo.user.domain.User;
 import org.springframework.web.bind.annotation.*;
 
 public class PostController {
