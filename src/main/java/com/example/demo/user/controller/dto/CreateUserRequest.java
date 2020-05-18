@@ -1,4 +1,4 @@
-package com.example.demo.user.api.dto;
+package com.example.demo.user.controller.dto;
 
 import lombok.Getter;
 

@@ -1,8 +1,8 @@
 package com.example.demo.user.service;
 
-import com.example.demo.user.api.dto.CreateUserRequest;
-import com.example.demo.user.api.dto.UserResponse;
-import com.example.demo.user.domain.User;
+import com.example.demo.user.controller.dto.CreateUserRequest;
+import com.example.demo.user.controller.dto.UserResponse;
+import com.example.demo.user.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.example.demo.post.service;
 
-import com.example.demo.post.domain.Post;
-import com.example.demo.post.dto.CreatePostRequest;
+import com.example.demo.post.model.Post;
+import com.example.demo.post.controller.dto.CreatePostRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
