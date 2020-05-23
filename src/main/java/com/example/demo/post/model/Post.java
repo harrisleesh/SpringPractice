@@ -23,20 +23,20 @@ public class Post {
     private String title;
     private String content;
     private Long viewCount;
-    private int likeCount;
-    private User author;
+    private Long likeCount;
+    private Long userId;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
     @Builder
-    public Post(Long id, String content, Long viewCount, User author){
-        this.id=id;
+    public Post(String title, String content, Long userId){
+        this.title=title;
         this.content=content;
-        this.viewCount=viewCount;
-        this.likeCount=0;
-        this.author=author;
+        this.viewCount=0L;
+        this.likeCount=0L;
+        this.userId=userId;
         this.createdAt=LocalDateTime.now();
         this.modifiedAt=LocalDateTime.now();
     }
