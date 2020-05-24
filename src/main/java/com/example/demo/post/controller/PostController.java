@@ -1,9 +1,17 @@
 package com.example.demo.post.controller;
 
+import com.example.demo.post.controller.dto.PostRequestDto;
+import com.example.demo.post.controller.dto.PostResponseDto;
 import com.example.demo.post.service.PostService;
 import com.example.demo.post.model.Post;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RestController
+@RequestMapping("/posts")
 public class PostController {
     private PostService postService;
 
@@ -12,27 +20,36 @@ public class PostController {
     }
 
     //Read
-    @GetMapping("/posts")
-    private Post getPost(@RequestParam(required = true) int id){
+    @ResponseBody
+    @GetMapping
+    private List<PostResponseDto> getPostAll(){
+        return postService.getPostAll();
+    }
+
+    //Read
+    @ResponseBody
+    @GetMapping
+    private PostResponseDto getPostById(@RequestParam(required = true) Long id){
         return postService.getPost(id);
     }
 
     //Create
-    @PostMapping("/posts")
-    private Post postPost(){
-        return postService.createPost();
+    @PostMapping
+    private ResponseEntity<Long> createPost(@RequestBody PostRequestDto postRequestDto){
+        return ResponseEntity.ok(postService.createPost(postRequestDto));
     }
 
     //Update
 
-    @PutMapping("/posts")
-    private Post putPost(@RequestParam(required = true) int id, @RequestParam(required = true) String name){
-        return postService.updatePost(id, name);
+    @PutMapping
+    private ResponseEntity<Long> updatePost(@RequestParam(required = true) Long id, @RequestBody PostRequestDto postRequestDto){
+        return ResponseEntity.ok(postService.updatePost(id, postRequestDto));
+
     }
 
     //Delete
-    @DeleteMapping("/posts")
-    private String deletePost(@RequestParam(required = true) int id){
-        return postService.deletePost(id);
+    @DeleteMapping
+    private ResponseEntity<Long> deletePost(@RequestParam(required = true) Long id){
+        return ResponseEntity.ok(postService.deletePost(id));
     }
 }
