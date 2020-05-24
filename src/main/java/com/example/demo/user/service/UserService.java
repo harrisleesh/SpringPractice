@@ -1,7 +1,6 @@
 package com.example.demo.user.service;
 
-import com.example.demo.user.controller.dto.CreateUserRequest;
-import com.example.demo.user.controller.dto.UserResponse;
+import com.example.demo.user.controller.dto.UserResponseDto;
 import com.example.demo.user.model.User;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ public class UserService {
     private List<User> users = new ArrayList<>();
     private Long nextId = 0L;
 
-    public UserResponse createUser(CreateUserRequest createUserRequest){
+    public UserResponseDto createUser(CreateUserRequest createUserRequest){
         User user = User.builder()
                 .id(nextId++)
                 .email(createUserRequest.getEmail())
@@ -27,8 +26,8 @@ public class UserService {
         return getUserResponse(user);
     }
 
-    private UserResponse getUserResponse(User user) {
-        return UserResponse.builder()
+    private UserResponseDto getUserResponse(User user) {
+        return UserResponseDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
                 .password(user.getPassword())
@@ -36,7 +35,7 @@ public class UserService {
                 .build();
     }
 
-    public UserResponse getUser(int id) {
+    public UserResponseDto getUser(int id) {
         return getUserResponse(
                 users.stream()
                 .filter(user-> user.getId() == id)
@@ -44,7 +43,7 @@ public class UserService {
         );
     }
 
-    public UserResponse updateUser(int id, String name) {
+    public UserResponseDto updateUser(int id, String name) {
         User renameUser = users.stream()
                 .filter(user-> user.getId() == id)
                 .findFirst().get();
