@@ -3,38 +3,41 @@ package com.example.demo.post.service;
 import com.example.demo.post.controller.dto.PostRequestDto;
 import com.example.demo.post.controller.dto.PostResponseDto;
 import com.example.demo.post.model.Post;
+import com.example.demo.post.model.PostRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class PostService {
-    private Map<Long, Post> posts = new HashMap<>();
-    private Long nextId  = 0L;
+
+    private final PostRepository postRepository;
+
+    public List<PostResponseDto> getPostAll() {
+        return PostResponseDto.listOf(postRepository.findAll());
+    }
+
+    public PostResponseDto getPostById(Long id) {
+        Post post = postRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다."));
+        return PostResponseDto.from(post);
+    }
 
     public Long createPost(PostRequestDto postRequestDto){
-        Post post = new Post();
-
-        posts.put(post.getId(), post);
-        nextId++;
-        return post.getId();
+        return postRepository.save(postRequestDto.toEntity()).getId();
     }
 
     public Long updatePost(Long id, PostRequestDto postRequestDto) {
-        return null;
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다."));
+        post.update(postRequestDto.toEntity());
+        return post.getId();
     }
 
     public Long deletePost(Long id) {
-        return null;
-    }
-
-    public PostResponseDto getPost(Long id) {
-        return null;
-    }
-
-    public List<PostResponseDto> getPostAll() {
-        return null;
+        postRepository.deleteById(id);
+        return id;
     }
 }

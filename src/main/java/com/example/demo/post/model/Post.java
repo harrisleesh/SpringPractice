@@ -1,6 +1,5 @@
 package com.example.demo.post.model;
 
-import com.example.demo.user.model.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,21 +23,26 @@ public class Post {
     private String content;
     private Long viewCount;
     private Long likeCount;
-    private Long userId;
+    private Long authorId;
     @CreatedDate
     private LocalDateTime createdAt;
     @LastModifiedDate
-    private LocalDateTime modifiedAt;
+    private LocalDateTime lastUpdatedAt;
 
     @Builder
-    public Post(String title, String content, Long userId){
+    public Post(String title, String content, Long authorId){
         this.title=title;
         this.content=content;
         this.viewCount=0L;
         this.likeCount=0L;
-        this.userId=userId;
+        this.authorId =authorId;
         this.createdAt=LocalDateTime.now();
-        this.modifiedAt=LocalDateTime.now();
+        this.lastUpdatedAt =LocalDateTime.now();
     }
 
+    public void update(Post postToUpdate){
+        this.title=postToUpdate.getTitle();
+        this.content=postToUpdate.getContent();
+        this.authorId=postToUpdate.getAuthorId();
+    }
 }

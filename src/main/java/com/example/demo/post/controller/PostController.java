@@ -3,8 +3,6 @@ package com.example.demo.post.controller;
 import com.example.demo.post.controller.dto.PostRequestDto;
 import com.example.demo.post.controller.dto.PostResponseDto;
 import com.example.demo.post.service.PostService;
-import com.example.demo.post.model.Post;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +26,9 @@ public class PostController {
 
     //Read
     @ResponseBody
-    @GetMapping
-    private PostResponseDto getPostById(@RequestParam(required = true) Long id){
-        return postService.getPost(id);
+    @GetMapping("/{id}")
+    private PostResponseDto getPostById(@PathVariable Long id){
+        return postService.getPostById(id);
     }
 
     //Create
@@ -41,15 +39,15 @@ public class PostController {
 
     //Update
 
-    @PutMapping
-    private ResponseEntity<Long> updatePost(@RequestParam(required = true) Long id, @RequestBody PostRequestDto postRequestDto){
+    @PutMapping("/{id}")
+    private ResponseEntity<Long> updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto){
         return ResponseEntity.ok(postService.updatePost(id, postRequestDto));
 
     }
 
     //Delete
-    @DeleteMapping
-    private ResponseEntity<Long> deletePost(@RequestParam(required = true) Long id){
+    @DeleteMapping("/{id}")
+    private ResponseEntity<Long> deletePost(@PathVariable Long id){
         return ResponseEntity.ok(postService.deletePost(id));
     }
 }
