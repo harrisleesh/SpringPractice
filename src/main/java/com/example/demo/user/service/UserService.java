@@ -2,16 +2,26 @@ package com.example.demo.user.service;
 
 import com.example.demo.user.controller.dto.UserResponseDto;
 import com.example.demo.user.model.User;
+import com.example.demo.user.model.UserRepository;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class UserService {
-    private List<User> users = new ArrayList<>();
-    private Long nextId = 0L;
+
+
+    private final UserRepository userRepository;
+
+    public List<UserResponseDto> getUserAll() {
+        userRepository.findAll();
+        return null;
+    }
 
     public UserResponseDto createUser(CreateUserRequest createUserRequest){
         User user = User.builder()
@@ -52,11 +62,11 @@ public class UserService {
         //      users.add(renameUser);
         return getUserResponse(renameUser);
     }
-
     public String deleteUser(int id) {
         users = users.stream()
                 .filter(user->user.getId() != id)
                 .collect(Collectors.toList());
         return "Delete Success " + id;
     }
+
 }

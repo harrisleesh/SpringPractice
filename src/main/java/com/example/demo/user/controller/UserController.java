@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
@@ -17,7 +19,7 @@ public class UserController {
     //Read
     @ResponseBody
     @GetMapping
-    private UserResponseDto getUserAll(){
+    private List<UserResponseDto> getUserAll(){
         return userService.getUserAll();
     }
 
@@ -48,6 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/longin")
+
 
     @PostMapping("/logout")
 }
